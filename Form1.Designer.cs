@@ -30,37 +30,26 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.libraryTab = new System.Windows.Forms.TabPage();
             this.explorerTab = new System.Windows.Forms.TabPage();
-            this.dddd = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.downloadButton = new System.Windows.Forms.Button();
+            this.searchResultDetailTextBox = new System.Windows.Forms.RichTextBox();
             this.searchResultsGrid = new System.Windows.Forms.DataGridView();
-            this.downloadButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.thumbnailDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.selectResultButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.videoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.explorerSearchButton = new System.Windows.Forms.Button();
             this.explorerSearchTextBox = new System.Windows.Forms.TextBox();
             this.settingsTab = new System.Windows.Forms.TabPage();
             this.logsBox = new System.Windows.Forms.ListBox();
-            this.thumbnailDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.videoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.explorerTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchResultsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.videoBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(921, 666);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // tabControl1
             // 
@@ -85,8 +74,8 @@
             // 
             // explorerTab
             // 
-            this.explorerTab.Controls.Add(this.dddd);
-            this.explorerTab.Controls.Add(this.richTextBox1);
+            this.explorerTab.Controls.Add(this.downloadButton);
+            this.explorerTab.Controls.Add(this.searchResultDetailTextBox);
             this.explorerTab.Controls.Add(this.searchResultsGrid);
             this.explorerTab.Controls.Add(this.explorerSearchButton);
             this.explorerTab.Controls.Add(this.explorerSearchTextBox);
@@ -98,22 +87,23 @@
             this.explorerTab.Text = "Explorer";
             this.explorerTab.UseVisualStyleBackColor = true;
             // 
-            // dddd
+            // downloadButton
             // 
-            this.dddd.Location = new System.Drawing.Point(830, 204);
-            this.dddd.Name = "dddd";
-            this.dddd.Size = new System.Drawing.Size(139, 23);
-            this.dddd.TabIndex = 4;
-            this.dddd.Text = "Download";
-            this.dddd.UseVisualStyleBackColor = true;
+            this.downloadButton.Location = new System.Drawing.Point(711, 204);
+            this.downloadButton.Name = "downloadButton";
+            this.downloadButton.Size = new System.Drawing.Size(258, 23);
+            this.downloadButton.TabIndex = 4;
+            this.downloadButton.Text = "Download";
+            this.downloadButton.UseVisualStyleBackColor = true;
+            this.downloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
             // 
-            // richTextBox1
+            // searchResultDetailTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(830, 34);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(139, 163);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "";
+            this.searchResultDetailTextBox.Location = new System.Drawing.Point(710, 34);
+            this.searchResultDetailTextBox.Name = "searchResultDetailTextBox";
+            this.searchResultDetailTextBox.Size = new System.Drawing.Size(259, 163);
+            this.searchResultDetailTextBox.TabIndex = 3;
+            this.searchResultDetailTextBox.Text = "";
             // 
             // searchResultsGrid
             // 
@@ -128,7 +118,7 @@
             this.thumbnailDataGridViewImageColumn,
             this.titleDataGridViewTextBoxColumn,
             this.authorDataGridViewTextBoxColumn,
-            this.downloadButton});
+            this.selectResultButton});
             this.searchResultsGrid.DataSource = this.videoBindingSource;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -141,49 +131,9 @@
             this.searchResultsGrid.Location = new System.Drawing.Point(7, 34);
             this.searchResultsGrid.MultiSelect = false;
             this.searchResultsGrid.Name = "searchResultsGrid";
-            this.searchResultsGrid.Size = new System.Drawing.Size(816, 563);
+            this.searchResultsGrid.Size = new System.Drawing.Size(697, 563);
             this.searchResultsGrid.TabIndex = 2;
             this.searchResultsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SearchResults_CellClick);
-            // 
-            // downloadButton
-            // 
-            this.downloadButton.HeaderText = "Download";
-            this.downloadButton.Name = "downloadButton";
-            this.downloadButton.Text = "Download";
-            // 
-            // explorerSearchButton
-            // 
-            this.explorerSearchButton.Location = new System.Drawing.Point(168, 3);
-            this.explorerSearchButton.Name = "explorerSearchButton";
-            this.explorerSearchButton.Size = new System.Drawing.Size(75, 23);
-            this.explorerSearchButton.TabIndex = 1;
-            this.explorerSearchButton.Text = "button2";
-            this.explorerSearchButton.UseVisualStyleBackColor = true;
-            this.explorerSearchButton.Click += new System.EventHandler(this.ExplorerSearchButton_Click);
-            // 
-            // explorerSearchTextBox
-            // 
-            this.explorerSearchTextBox.Location = new System.Drawing.Point(7, 7);
-            this.explorerSearchTextBox.Name = "explorerSearchTextBox";
-            this.explorerSearchTextBox.Size = new System.Drawing.Size(114, 20);
-            this.explorerSearchTextBox.TabIndex = 0;
-            // 
-            // settingsTab
-            // 
-            this.settingsTab.Location = new System.Drawing.Point(4, 22);
-            this.settingsTab.Name = "settingsTab";
-            this.settingsTab.Size = new System.Drawing.Size(975, 603);
-            this.settingsTab.TabIndex = 2;
-            this.settingsTab.Text = "Settings";
-            this.settingsTab.UseVisualStyleBackColor = true;
-            // 
-            // logsBox
-            // 
-            this.logsBox.FormattingEnabled = true;
-            this.logsBox.Location = new System.Drawing.Point(13, 648);
-            this.logsBox.Name = "logsBox";
-            this.logsBox.Size = new System.Drawing.Size(905, 69);
-            this.logsBox.TabIndex = 2;
             // 
             // thumbnailDataGridViewImageColumn
             // 
@@ -206,16 +156,55 @@
             this.authorDataGridViewTextBoxColumn.HeaderText = "Author";
             this.authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
             // 
+            // selectResultButton
+            // 
+            this.selectResultButton.HeaderText = "Download";
+            this.selectResultButton.Name = "selectResultButton";
+            this.selectResultButton.Text = "Select";
+            // 
             // videoBindingSource
             // 
             this.videoBindingSource.DataSource = typeof(Video);
+            // 
+            // explorerSearchButton
+            // 
+            this.explorerSearchButton.Location = new System.Drawing.Point(418, 7);
+            this.explorerSearchButton.Name = "explorerSearchButton";
+            this.explorerSearchButton.Size = new System.Drawing.Size(127, 20);
+            this.explorerSearchButton.TabIndex = 1;
+            this.explorerSearchButton.Text = "Search";
+            this.explorerSearchButton.UseVisualStyleBackColor = true;
+            this.explorerSearchButton.Click += new System.EventHandler(this.ExplorerSearchButton_Click);
+            // 
+            // explorerSearchTextBox
+            // 
+            this.explorerSearchTextBox.Location = new System.Drawing.Point(7, 7);
+            this.explorerSearchTextBox.Name = "explorerSearchTextBox";
+            this.explorerSearchTextBox.Size = new System.Drawing.Size(405, 20);
+            this.explorerSearchTextBox.TabIndex = 0;
+            // 
+            // settingsTab
+            // 
+            this.settingsTab.Location = new System.Drawing.Point(4, 22);
+            this.settingsTab.Name = "settingsTab";
+            this.settingsTab.Size = new System.Drawing.Size(975, 603);
+            this.settingsTab.TabIndex = 2;
+            this.settingsTab.Text = "Settings";
+            this.settingsTab.UseVisualStyleBackColor = true;
+            // 
+            // logsBox
+            // 
+            this.logsBox.FormattingEnabled = true;
+            this.logsBox.Location = new System.Drawing.Point(13, 648);
+            this.logsBox.Name = "logsBox";
+            this.logsBox.Size = new System.Drawing.Size(905, 69);
+            this.logsBox.TabIndex = 2;
             // 
             // MusikiPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 729);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.logsBox);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -232,8 +221,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage libraryTab;
         private System.Windows.Forms.TabPage explorerTab;
@@ -242,13 +229,13 @@
         private System.Windows.Forms.DataGridView searchResultsGrid;
         public System.Windows.Forms.TextBox explorerSearchTextBox;
         private System.Windows.Forms.BindingSource videoBindingSource;
-        private System.Windows.Forms.Button dddd;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        public System.Windows.Forms.ListBox logsBox;
+        public System.Windows.Forms.RichTextBox searchResultDetailTextBox;
+        private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.DataGridViewImageColumn thumbnailDataGridViewImageColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn authorDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn downloadButton;
-        public System.Windows.Forms.ListBox logsBox;
+        private System.Windows.Forms.DataGridViewButtonColumn selectResultButton;
     }
 }
 

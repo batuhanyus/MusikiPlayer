@@ -15,15 +15,18 @@ namespace MusikiPlayer
     {
         public ListBox logsBox;
 
-        List<Video> foundVideos = new List<Video>();
+        public List<Video> foundVideos = new List<Video>();
 
+        public Video selectedVideo;
 
         public async Task PullVideoAsync()
         {
+            logsBox.Items.Add("Pulling video with ID: " + selectedVideo.ID);
+
             var client = new YoutubeClient();
 
             // Get metadata for all streams in this video
-            var streamInfoSet = await client.GetVideoMediaStreamInfosAsync("Bx51eegLTY8");
+            var streamInfoSet = await client.GetVideoMediaStreamInfosAsync("t1TcDHrkQYg");
 
             // Select one of the streams, e.g. highest quality muxed stream
             //var streamInfo = streamInfoSet.Muxed.WithHighestVideoQuality();
@@ -42,7 +45,8 @@ namespace MusikiPlayer
             var ext = streamInfo.Container.GetFileExtension();
 
             // Download stream to file
-            await client.DownloadMediaStreamAsync(streamInfo, $"D:/Music/asd.mp3");
+            logsBox.Items.Add("LOL"+Settings.libraryLocation);
+            await client.DownloadMediaStreamAsync(streamInfo, $"C:/Users/Raki/Desktop/Debug/Library");
 
             GC.Collect();
         }
@@ -69,7 +73,7 @@ namespace MusikiPlayer
                 }
 
                 foundVideos.Add(v);
-            }                       
+            }
 
             for (int i = 0; i < previousVideoCount; i++)
             {
