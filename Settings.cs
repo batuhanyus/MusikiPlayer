@@ -17,13 +17,13 @@ namespace MusikiPlayer
             utilitiesLocation = AppDomain.CurrentDomain.BaseDirectory + "Utilities";
 
             FoldersCheck();
-
-            logic.logsBox.Items.Add(libraryLocation);
         }
 
         static void FoldersCheck()
         {
             System.IO.Directory.CreateDirectory(libraryLocation);
+            System.IO.Directory.CreateDirectory(utilitiesLocation);
+
         }
     }
 }

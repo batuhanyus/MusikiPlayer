@@ -19,21 +19,21 @@ namespace MusikiPlayer
 
         public Video selectedVideo;
 
+        public string currentFile;
+
         public async Task PullVideoAsync()
         {
             logsBox.Items.Add("Pulling video with ID: " + selectedVideo.ID);
 
             var client = new YoutubeClient();
-
+            
             // Get metadata for all streams in this video
-            var streamInfoSet = await client.GetVideoMediaStreamInfosAsync("t1TcDHrkQYg");
-
+            var streamInfoSet = await client.GetVideoMediaStreamInfosAsync(selectedVideo.ID);
             // Select one of the streams, e.g. highest quality muxed stream
             //var streamInfo = streamInfoSet.Muxed.WithHighestVideoQuality();
 
             //...or highest bitrate audio stream
             var streamInfo = streamInfoSet.Audio.WithHighestBitrate();
-
             // ...or highest quality & highest framerate MP4 video stream
             // var streamInfo = streamInfoSet.Video
             //    .Where(s => s.Container == Container.Mp4)
@@ -41,32 +41,30 @@ namespace MusikiPlayer
             //    .ThenByDescending(s => s.Framerate)
             //    .First();
 
-            // Get file extension based on stream's container
-            var ext = streamInfo.Container.GetFileExtension();
-
             // Download stream to file
-            logsBox.Items.Add("LOL"+Settings.libraryLocation);
-            await client.DownloadMediaStreamAsync(streamInfo, $"C:/Users/Raki/Desktop/Debug/Library");
-
+            var sizeByte = streamInfo.Size;
+            var sizeMB = sizeByte / 1024 / 1024;
+            logsBox.Items.Add("Video Size: " + sizeMB.ToString());
+            await client.DownloadMediaStreamAsync(streamInfo, Settings.libraryLocation + "/" + Helpers.FileNameCorrecter(selectedVideo.Title) + ".mp3");
+            currentFile = Settings.libraryLocation + "/" + Helpers.FileNameCorrecter(selectedVideo.Title) + ".mp3";
+            
             GC.Collect();
         }
 
-        public void SearchYoutube(string text, DataGridView searchResultsGrid)
+        public async Task SearchYoutube(string text, DataGridView searchResultsGrid)
         {
             int previousVideoCount = foundVideos.Count;
 
-            VideoSearch search = new VideoSearch();
-            var results = search.SearchQuery(text, 1);
+            var client = new YoutubeClient();
+            var results = await client.SearchVideosAsync(text, 1);
 
             foreach (var item in results)
             {
                 Video v = new Video();
                 v.Title = item.Title;
-                //logsBox.Items.Add(v.Title);
                 v.Author = item.Author;
-                v.Url = item.Url;
-                v.ID = YoutubeClient.ParseVideoId(v.Url);
-                byte[] imageBytes = new WebClient().DownloadData(item.Thumbnail);
+                v.ID = item.Id;
+                byte[] imageBytes = new WebClient().DownloadData(item.Thumbnails.HighResUrl);
                 using (MemoryStream ms = new MemoryStream(imageBytes))
                 {
                     v.Thumbnail = Image.FromStream(ms);
@@ -80,10 +78,12 @@ namespace MusikiPlayer
                 foundVideos.RemoveAt(0);
             }
 
-            logsBox.Items.Add("Found videos count: " + foundVideos.Count.ToString());
+            //logsBox.Items.Add("Found videos count: " + foundVideos.Count.ToString());
 
             searchResultsGrid.DataSource = null;
             searchResultsGrid.DataSource = foundVideos;
-        }
+
+            GC.Collect();
+        }        
     }
 }

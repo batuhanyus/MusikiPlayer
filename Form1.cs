@@ -19,6 +19,7 @@ namespace MusikiPlayer
     {
         
         Logic logic;
+        Task t;
 
         public MusikiPlayer()
         {
@@ -58,7 +59,28 @@ namespace MusikiPlayer
 
         private void DownloadButton_Click(object sender, EventArgs e)
         { 
-            logic.PullVideoAsync();
+            t = logic.PullVideoAsync();            
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if(logic.currentFile != null)
+            {
+                var size = new FileInfo(logic.currentFile).Length;
+                size /= 1024;
+                size /= 1024;
+
+                MessageBox.Show(size.ToString());
+                logsBox.Items.Add("Downloaded Size:" + size.ToString());
+            }
+
+            if (t != null)
+            {
+                //logsBox.Items.Add(t.Status.ToString());
+
+                if (t.IsFaulted)
+                    logsBox.Items.Add(t.Exception.InnerExceptions[0].ToString());
+            }
         }
     }
 }

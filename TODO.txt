@@ -1,0 +1,1 @@
+﻿-Bazı karakterler dosya isminde yer alamaz.Dolayısıyla video title'ı ona göre düzenlemek gerek. Misal: ??

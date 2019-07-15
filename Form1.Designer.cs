@@ -33,18 +33,19 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.libraryTab = new System.Windows.Forms.TabPage();
             this.explorerTab = new System.Windows.Forms.TabPage();
-            this.downloadButton = new System.Windows.Forms.Button();
+            this.addToLibraryButton = new System.Windows.Forms.Button();
             this.searchResultDetailTextBox = new System.Windows.Forms.RichTextBox();
             this.searchResultsGrid = new System.Windows.Forms.DataGridView();
-            this.thumbnailDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.selectResultButton = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.videoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.explorerSearchButton = new System.Windows.Forms.Button();
             this.explorerSearchTextBox = new System.Windows.Forms.TextBox();
             this.settingsTab = new System.Windows.Forms.TabPage();
             this.logsBox = new System.Windows.Forms.ListBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.thumbnailDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.videoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.explorerTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchResultsGrid)).BeginInit();
@@ -74,7 +75,7 @@
             // 
             // explorerTab
             // 
-            this.explorerTab.Controls.Add(this.downloadButton);
+            this.explorerTab.Controls.Add(this.addToLibraryButton);
             this.explorerTab.Controls.Add(this.searchResultDetailTextBox);
             this.explorerTab.Controls.Add(this.searchResultsGrid);
             this.explorerTab.Controls.Add(this.explorerSearchButton);
@@ -87,15 +88,15 @@
             this.explorerTab.Text = "Explorer";
             this.explorerTab.UseVisualStyleBackColor = true;
             // 
-            // downloadButton
+            // addToLibraryButton
             // 
-            this.downloadButton.Location = new System.Drawing.Point(711, 204);
-            this.downloadButton.Name = "downloadButton";
-            this.downloadButton.Size = new System.Drawing.Size(258, 23);
-            this.downloadButton.TabIndex = 4;
-            this.downloadButton.Text = "Download";
-            this.downloadButton.UseVisualStyleBackColor = true;
-            this.downloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
+            this.addToLibraryButton.Location = new System.Drawing.Point(711, 204);
+            this.addToLibraryButton.Name = "addToLibraryButton";
+            this.addToLibraryButton.Size = new System.Drawing.Size(258, 23);
+            this.addToLibraryButton.TabIndex = 4;
+            this.addToLibraryButton.Text = "Add To Library";
+            this.addToLibraryButton.UseVisualStyleBackColor = true;
+            this.addToLibraryButton.Click += new System.EventHandler(this.DownloadButton_Click);
             // 
             // searchResultDetailTextBox
             // 
@@ -135,36 +136,11 @@
             this.searchResultsGrid.TabIndex = 2;
             this.searchResultsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SearchResults_CellClick);
             // 
-            // thumbnailDataGridViewImageColumn
-            // 
-            this.thumbnailDataGridViewImageColumn.DataPropertyName = "Thumbnail";
-            this.thumbnailDataGridViewImageColumn.HeaderText = "Thumbnail";
-            this.thumbnailDataGridViewImageColumn.Name = "thumbnailDataGridViewImageColumn";
-            this.thumbnailDataGridViewImageColumn.ReadOnly = true;
-            this.thumbnailDataGridViewImageColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.thumbnailDataGridViewImageColumn.Width = 62;
-            // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            // 
-            // authorDataGridViewTextBoxColumn
-            // 
-            this.authorDataGridViewTextBoxColumn.DataPropertyName = "Author";
-            this.authorDataGridViewTextBoxColumn.HeaderText = "Author";
-            this.authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
-            // 
             // selectResultButton
             // 
             this.selectResultButton.HeaderText = "Download";
             this.selectResultButton.Name = "selectResultButton";
             this.selectResultButton.Text = "Select";
-            // 
-            // videoBindingSource
-            // 
-            this.videoBindingSource.DataSource = typeof(Video);
             // 
             // explorerSearchButton
             // 
@@ -200,6 +176,37 @@
             this.logsBox.Size = new System.Drawing.Size(905, 69);
             this.logsBox.TabIndex = 2;
             // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
+            // 
+            // thumbnailDataGridViewImageColumn
+            // 
+            this.thumbnailDataGridViewImageColumn.DataPropertyName = "Thumbnail";
+            this.thumbnailDataGridViewImageColumn.HeaderText = "Thumbnail";
+            this.thumbnailDataGridViewImageColumn.Name = "thumbnailDataGridViewImageColumn";
+            this.thumbnailDataGridViewImageColumn.ReadOnly = true;
+            this.thumbnailDataGridViewImageColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.thumbnailDataGridViewImageColumn.Width = 62;
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            // 
+            // authorDataGridViewTextBoxColumn
+            // 
+            this.authorDataGridViewTextBoxColumn.DataPropertyName = "Author";
+            this.authorDataGridViewTextBoxColumn.HeaderText = "Author";
+            this.authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
+            // 
+            // videoBindingSource
+            // 
+            this.videoBindingSource.DataSource = typeof(Video);
+            // 
             // MusikiPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -231,11 +238,12 @@
         private System.Windows.Forms.BindingSource videoBindingSource;
         public System.Windows.Forms.ListBox logsBox;
         public System.Windows.Forms.RichTextBox searchResultDetailTextBox;
-        private System.Windows.Forms.Button downloadButton;
+        private System.Windows.Forms.Button addToLibraryButton;
         private System.Windows.Forms.DataGridViewImageColumn thumbnailDataGridViewImageColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn authorDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewButtonColumn selectResultButton;
+        private System.Windows.Forms.Timer timer;
     }
 }
 
